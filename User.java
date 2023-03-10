@@ -1,20 +1,43 @@
-//用户类
 public class User{
-	//属性 以下都是成员变量之实例变量
-	//用户编号
-	//int 是一种基本数据类型：整数型
-	//no是一个实例变量
-	int no;
-	//用户名
-	//String时一种引用数据类型：代表字符串。
-	//name是一个引用
-	String name;
-	//家庭住址
-	//Address是一种引用数据类型：代表家庭住址。
-	//addr是一个实例变量
-	//addr是一个引用
-	Address addr;
 	
+	private int id ;
+	private int age;
+	private String name;
 	
+	public User(int id ,int age ,String name) {
+		this.id  = id;
+		this.age =age;
+		this.name  =name;
+		
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", age=" + age + ", name=" + name + "]";
+	}
 	
 }
