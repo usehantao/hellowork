@@ -1,0 +1,52 @@
+使用Executors的工具方法 直接得到一个线程池对象
+
+public class ThreadPoolDemo03{
+	public static void main(String[]args){
+	//1.创建固定线程数量的线程池
+	ExecutorService pool = Executors.newFixedThreadPool(3);
+	
+	pool.execute(new MyRunnable());
+	pool.execute(new MyRunnable());
+	pool.execute(new MyRunnable());
+	pool.execute(new MyRunnable());//已经没有多余线程
+
+	}
+}
+
+定时器：
+定时器是一种控制任务延期调用，或者周期调用的技术
+作用：闹钟，定时邮件发送。
+定时器实现方式：
+一：Timer定时器
+二：ScheduledExecutorService定时器
+Timer定时器的使用与了解
+public class TimerDome02{
+	public static void main(String[]args){
+	//1.创建Timer定时器 ,定时器本身就是一个单线程
+	Timer timer =new Timer();
+	//2.调用方法，处理定时任务
+	timer.schedule(new TimerTask(){
+	@Override
+	public void run(){
+		System.out.println(Thread.currentThread().getName() + "执行一次--" + new Date());
+	}
+		} ,3000 ,2000);
+	}
+}
+
+ScheduledExecutorService定时器使用与了解
+public class TimerDome02{
+	public static void main(String[]args){
+	//1.创建ScheduledExecutorService线程池 ，做定时器
+	ScheduledExecutorService pool = Executors.newScheduledThreadPool(3);
+	
+	//2.开启定时任务
+	pool.scheduleAtFixedRate( new TimerTask(){
+	@Override
+	public void run(){
+	System.out.pritnln(Thread.currentThread().getName() + "执行输出 AAA" + new Date());}
+	},0,2 , TimeUnit.SECONDS);
+	
+	}
+}
+	
