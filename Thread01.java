@@ -1,49 +1,44 @@
-public class Thread01{
-	//mian 线程启动两个子线程
-	public static void main(String[]args) {
-		T1 t1 = new T1();
-		T2 t2 = new T2();
-		Thread thread1 =new Thread(t1);
-		Thread thread2 =new Thread(t2);
-		thread1.start();
-		thread2.start();
-		
+package com.jiheDome;
+
+public class Thread01 {
+	public static void main(String[]args) throws Exception {
+		//创建一个cat对象，可以当作线程使用
+		Cat cat1 = new Cat();
+		cat1.start();//启动线程
+		//当mian线程启动一个子线程后，程序不会阻塞在start方法
+		System.out.println("主线程继续执行" +Thread.currentThread().getName());
+		for(int i =0 ;i<15;i++) {
+			System.out.println("i =" +i);
+			Thread.sleep(1000);
+			
+		}
+				
 		
 	}
 }
 
-class T1 implements Runnable{
-	int count = 0;
+//当一个类继承了Thread 该类就可以当作线程使用
+//一般会重写run方法，写上自己的业务代码
+//run Thread 类 实现了Runnable接口的run方法
+class Cat extends Thread{
+	int times = 0; 
 	@Override
-	public void run() {
+	public void run() {//重写run方法，写上自己的业务逻辑
+		
 		while(true) {
-		System.out.println("发财在哪里" +  (++count));
+		System.out.println("喵喵，我是小猫咪" +(times)+"线程名称"+Thread.currentThread().getName());
+		//休眠1秒
 		try {
-		Thread.sleep(1000);
-	}catch(InterruptedException e) {
-		e.printStackTrace();
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			}
+		times ++;
+		if(times >20) {
+			break;
+		}
+		}
+		
 	}
-		if(count == 10) {
-			break;
-		}
-  }
- }
-}
-
-class T2 implements Runnable{
-	int count = 0;
-	@Override
-	public void run() {
-		while(true) {
-		System.out.println("馒头在这里" +  (++count));
-		try {
-		Thread.sleep(1000);
-	}catch(InterruptedException e) {
-		e.printStackTrace();
- 	}
-		if(count == 5) {
-			break;
-		}
-  }
- }
 }
